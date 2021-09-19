@@ -29,27 +29,33 @@ namespace MiCalculadora
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmbOperators = new System.Windows.Forms.ComboBox();
+            this.cmbOperadores = new System.Windows.Forms.ComboBox();
             this.txtOperando1 = new System.Windows.Forms.TextBox();
             this.txtOperando2 = new System.Windows.Forms.TextBox();
             this.btnOperar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.btnDecimalABinario = new System.Windows.Forms.Button();
-            this.btnBinarioADecimal = new System.Windows.Forms.Button();
+            this.btnConvertirABinario = new System.Windows.Forms.Button();
+            this.btnConvertirADecimal = new System.Windows.Forms.Button();
             this.lstHistorial = new System.Windows.Forms.ListBox();
             this.lblDisplay = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // cmbOperators
+            // cmbOperadores
             // 
-            this.cmbOperators.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cmbOperators.FormattingEnabled = true;
-            this.cmbOperators.Location = new System.Drawing.Point(185, 115);
-            this.cmbOperators.Name = "cmbOperators";
-            this.cmbOperators.Size = new System.Drawing.Size(121, 31);
-            this.cmbOperators.TabIndex = 2;
-            this.cmbOperators.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cmbOperadores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOperadores.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cmbOperadores.FormattingEnabled = true;
+            this.cmbOperadores.Items.AddRange(new object[] {
+            " ",
+            "+",
+            "-",
+            "/",
+            "*"});
+            this.cmbOperadores.Location = new System.Drawing.Point(185, 115);
+            this.cmbOperadores.Name = "cmbOperadores";
+            this.cmbOperadores.Size = new System.Drawing.Size(121, 31);
+            this.cmbOperadores.TabIndex = 2;
             // 
             // txtOperando1
             // 
@@ -58,7 +64,6 @@ namespace MiCalculadora
             this.txtOperando1.Name = "txtOperando1";
             this.txtOperando1.Size = new System.Drawing.Size(121, 31);
             this.txtOperando1.TabIndex = 1;
-            this.txtOperando1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txtOperando2
             // 
@@ -67,7 +72,6 @@ namespace MiCalculadora
             this.txtOperando2.Name = "txtOperando2";
             this.txtOperando2.Size = new System.Drawing.Size(121, 31);
             this.txtOperando2.TabIndex = 3;
-            this.txtOperando2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // btnOperar
             // 
@@ -97,6 +101,7 @@ namespace MiCalculadora
             this.btnLimpiar.TabIndex = 5;
             this.btnLimpiar.Text = "&Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnCerrar
             // 
@@ -113,33 +118,35 @@ namespace MiCalculadora
             this.btnCerrar.UseVisualStyleBackColor = false;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // btnDecimalABinario
+            // btnConvertirABinario
             // 
-            this.btnDecimalABinario.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnDecimalABinario.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDecimalABinario.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDecimalABinario.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDecimalABinario.Location = new System.Drawing.Point(89, 291);
-            this.btnDecimalABinario.Name = "btnDecimalABinario";
-            this.btnDecimalABinario.Padding = new System.Windows.Forms.Padding(3);
-            this.btnDecimalABinario.Size = new System.Drawing.Size(139, 49);
-            this.btnDecimalABinario.TabIndex = 7;
-            this.btnDecimalABinario.Text = "Convertir a &Binario";
-            this.btnDecimalABinario.UseVisualStyleBackColor = false;
+            this.btnConvertirABinario.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnConvertirABinario.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConvertirABinario.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnConvertirABinario.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnConvertirABinario.Location = new System.Drawing.Point(89, 291);
+            this.btnConvertirABinario.Name = "btnConvertirABinario";
+            this.btnConvertirABinario.Padding = new System.Windows.Forms.Padding(3);
+            this.btnConvertirABinario.Size = new System.Drawing.Size(139, 49);
+            this.btnConvertirABinario.TabIndex = 7;
+            this.btnConvertirABinario.Text = "Convertir a &Binario";
+            this.btnConvertirABinario.UseVisualStyleBackColor = false;
+            this.btnConvertirABinario.Click += new System.EventHandler(this.btnDecimalABinario_Click);
             // 
-            // btnBinarioADecimal
+            // btnConvertirADecimal
             // 
-            this.btnBinarioADecimal.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnBinarioADecimal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBinarioADecimal.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnBinarioADecimal.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnBinarioADecimal.Location = new System.Drawing.Point(258, 291);
-            this.btnBinarioADecimal.Name = "btnBinarioADecimal";
-            this.btnBinarioADecimal.Padding = new System.Windows.Forms.Padding(3);
-            this.btnBinarioADecimal.Size = new System.Drawing.Size(139, 49);
-            this.btnBinarioADecimal.TabIndex = 8;
-            this.btnBinarioADecimal.Text = "Convertir a &Decimal";
-            this.btnBinarioADecimal.UseVisualStyleBackColor = false;
+            this.btnConvertirADecimal.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnConvertirADecimal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConvertirADecimal.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnConvertirADecimal.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnConvertirADecimal.Location = new System.Drawing.Point(258, 291);
+            this.btnConvertirADecimal.Name = "btnConvertirADecimal";
+            this.btnConvertirADecimal.Padding = new System.Windows.Forms.Padding(3);
+            this.btnConvertirADecimal.Size = new System.Drawing.Size(139, 49);
+            this.btnConvertirADecimal.TabIndex = 8;
+            this.btnConvertirADecimal.Text = "Convertir a &Decimal";
+            this.btnConvertirADecimal.UseVisualStyleBackColor = false;
+            this.btnConvertirADecimal.Click += new System.EventHandler(this.btnBinarioADecimal_Click);
             // 
             // lstHistorial
             // 
@@ -153,13 +160,16 @@ namespace MiCalculadora
             // 
             // lblDisplay
             // 
-            this.lblDisplay.AutoSize = true;
+            this.lblDisplay.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblDisplay.AutoEllipsis = true;
             this.lblDisplay.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblDisplay.Location = new System.Drawing.Point(19, 13);
             this.lblDisplay.Name = "lblDisplay";
-            this.lblDisplay.Size = new System.Drawing.Size(77, 23);
+            this.lblDisplay.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblDisplay.Size = new System.Drawing.Size(452, 82);
             this.lblDisplay.TabIndex = 10;
-            this.lblDisplay.Text = "label1";
+            this.lblDisplay.Text = "0";
+            this.lblDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // FormCalculadora
             // 
@@ -169,20 +179,21 @@ namespace MiCalculadora
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lblDisplay);
             this.Controls.Add(this.lstHistorial);
-            this.Controls.Add(this.btnBinarioADecimal);
-            this.Controls.Add(this.btnDecimalABinario);
+            this.Controls.Add(this.btnConvertirADecimal);
+            this.Controls.Add(this.btnConvertirABinario);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnOperar);
             this.Controls.Add(this.txtOperando2);
             this.Controls.Add(this.txtOperando1);
-            this.Controls.Add(this.cmbOperators);
+            this.Controls.Add(this.cmbOperadores);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormCalculadora";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calculadora de Fernando Dieguez del curso 2ºE";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCalculadora_FormClosing);
             this.Load += new System.EventHandler(this.FormCalculadora_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -191,14 +202,14 @@ namespace MiCalculadora
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cmbOperators;
+        private System.Windows.Forms.ComboBox cmbOperadores;
         private System.Windows.Forms.TextBox txtOperando1;
         private System.Windows.Forms.TextBox txtOperando2;
         private System.Windows.Forms.Button btnOperar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnCerrar;
-        private System.Windows.Forms.Button btnDecimalABinario;
-        private System.Windows.Forms.Button btnBinarioADecimal;
+        private System.Windows.Forms.Button btnConvertirABinario;
+        private System.Windows.Forms.Button btnConvertirADecimal;
         private System.Windows.Forms.ListBox lstHistorial;
         private System.Windows.Forms.Label lblDisplay;
     }

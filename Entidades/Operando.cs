@@ -15,30 +15,24 @@ namespace Entidades
         }
         public string BinarioDecimal(string binario)
         {
-            int sum = 0;
-            int potencia = 0;
-            int convertido;
-            bool conversionOk = int.TryParse(binario, out convertido);
-            if (!EsBinario(binario) || !conversionOk || convertido < 0) {
+            if (EsBinario(binario)) { 
+            char[] invertido = binario.ToCharArray();
+            Array.Reverse(invertido);
+            int total = 0;
+
+            for (int i = 0; i < invertido.Length; i++)
+            {
+                if (invertido[i] == '1')
+                {
+                    total += (int)Math.Pow(2, i);
+                }
+            }
+            return total.ToString();
+            }
+            else
+            {
                 return "Valor invalido";
             }
-            for (int i = binario.Length; i > 0; i--)
-            {
-                if (binario[i] == '1')
-                {
-                    potencia++;
-                    if (i == 0)
-                    {
-                        sum += 1;
-                    }
-                    else
-                    {
-                        sum += (int)Math.Pow(2, potencia);
-                    }
-                }
-
-            }
-            return sum.ToString();
         }
         public string DecimalBinario(double numero)
         {
@@ -46,7 +40,7 @@ namespace Entidades
             string binario = "";
             if (numero > 0)
             {
-                while (numero > 0)
+                while (numero > 1)
                 {
                     resto = (int)numero % 2;
                     numero /= 2;
@@ -118,14 +112,15 @@ namespace Entidades
         }
         public static double operator /(Operando n1, Operando n2)
         {
-            if (n2.numero == 0) {
+            if (n2.numero == 0)
+            {
                 return double.MinValue;
             }
             return n1.numero / n2.numero;
         }
         public static double operator *(Operando n1, Operando n2)
         {
-            return n1.numero / n2.numero;
+            return n1.numero * n2.numero;
         }
 
     }
