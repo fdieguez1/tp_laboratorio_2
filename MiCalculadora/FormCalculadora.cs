@@ -17,7 +17,7 @@ namespace MiCalculadora
         {
             InitializeComponent();
         }
-
+       
         private void FormCalculadora_Load(object sender, EventArgs e)
         {
             Limpiar();
@@ -50,6 +50,13 @@ namespace MiCalculadora
             this.lstHistorial.Items.Add($"{numero1} {displayOperador} {numero2} = {result}");
         }
 
+        /// <summary>
+        /// Recibe 3 strings, llama a la clase calculadora y a su metodo operar
+        /// </summary>
+        /// <param name="numero1">cadena de texto del primer operando</param>
+        /// <param name="numero2">cadena de texto del segundo operando</param>
+        /// <param name="operador">cadena de texto del operador</param>
+        /// <returns>Devuelve el resultado de la operacion como double</returns>
         static double Operar(string numero1, string numero2, string operador)
         {
             Operando auxOperando1 = new Operando(numero1);
@@ -71,6 +78,9 @@ namespace MiCalculadora
         {
             Limpiar();
         }
+        /// <summary>
+        /// Limpia los campos y combos reiniciandolos a su valor por defecto, no limpia el historial de operaciones
+        /// </summary>
         public void Limpiar()
         {
             this.txtOperando1.Text = string.Empty;
