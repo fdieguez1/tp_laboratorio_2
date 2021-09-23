@@ -21,19 +21,20 @@ namespace Entidades
         /// <returns>devuelve el numero convertido</returns>
         public string BinarioDecimal(string binario)
         {
-            if (EsBinario(binario)) { 
-            char[] invertido = binario.ToCharArray();
-            Array.Reverse(invertido);
-            int total = 0;
-
-            for (int i = 0; i < invertido.Length; i++)
+            if (EsBinario(binario))
             {
-                if (invertido[i] == '1')
+                char[] invertido = binario.ToCharArray();
+                Array.Reverse(invertido);
+                int total = 0;
+
+                for (int i = 0; i < invertido.Length; i++)
                 {
-                    total += (int)Math.Pow(2, i);
+                    if (invertido[i] == '1')
+                    {
+                        total += (int)Math.Pow(2, i);
+                    }
                 }
-            }
-            return total.ToString();
+                return total.ToString();
             }
             else
             {
@@ -52,7 +53,7 @@ namespace Entidades
             string binario = "";
             if (numero > 0)
             {
-                while (numero > 1)
+                while (numero >= 1)
                 {
                     resto = (int)numero % 2;
                     numero /= 2;
@@ -106,7 +107,6 @@ namespace Entidades
         /// </summary>
         public Operando()
         {
-            this.Numero = 0.ToString();
         }
         /// <summary>
         /// Constructor de la clase operando, con parametro double numero, asigna el valor del parametro a la propiedad Numero del objeto
@@ -120,7 +120,7 @@ namespace Entidades
         /// Constructor de la clase operando, con parametro string strNumero, asigna el valor del parametro a la propiedad Numero del objeto
         /// </summary>
         /// <param name="numero">cadena de texto con el numero a asignar</param>
-        public Operando(string strNumero) : this()
+        public Operando(string strNumero)
         {
             this.Numero = strNumero;
         }
@@ -132,14 +132,9 @@ namespace Entidades
         /// <returns>devuelve la conversion de la cadena ingresada, 0 si no logro convertirla</returns>
         public double ValidarOperando(string strNumero)
         {
-            if (double.TryParse(strNumero, out double valor))
-            {
-                return valor;
-            }
-            else
-            {
-                return 0;
-            }
+            double valor;
+            double.TryParse(strNumero, out valor);
+            return valor;
         }
 
         /// <summary>
