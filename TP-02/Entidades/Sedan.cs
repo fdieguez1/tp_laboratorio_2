@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Entidades
 {
-    class Sedan : Vehiculo
+    public class Sedan : Vehiculo
     {
         public enum ETipo { CuatroPuertas, CincoPuertas }
         ETipo tipo;
@@ -28,11 +28,15 @@ namespace Entidades
         /// <summary>
         /// Sedan son 'Mediano'
         /// </summary>
-        protected override short Tamanio
+        protected override ETamanio Tamanio
         {
             get
             {
                 return this.Tamanio;
+            }
+            set
+            {
+                this.Tamanio = value;
             }
         }
 
