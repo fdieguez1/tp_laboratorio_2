@@ -9,6 +9,7 @@ namespace Entidades
     /// <summary>
     /// Clase usuario representa un usuario vinculado a un error, guarda su id, edad y genero
     /// </summary>
+    [Serializable]
     public class Usuario 
     {
         static int idAnterior;
