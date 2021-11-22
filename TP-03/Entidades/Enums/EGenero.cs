@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades.Enums
 {
-    public enum ESexo
+    public enum EGenero
     {
         Masculino,
         Femenino,

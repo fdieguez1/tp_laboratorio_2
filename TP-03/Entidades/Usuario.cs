@@ -1,15 +1,17 @@
 ﻿using Entidades.Enums;
 using Entidades.Exceptions;
 using Entidades.Extensions;
+using System;
+
 
 namespace Entidades
 {
-    public sealed class Usuario
+    public class Usuario 
     {
         static int idAnterior;
         int id;
         int edad;
-        ESexo genero;
+        EGenero genero;
         public int Id
         {
             get { return this.id; }
@@ -27,12 +29,12 @@ namespace Entidades
             idAnterior = 0;
         }
 
-        private Usuario()
+        public Usuario()
         {
             this.Id = ++idAnterior;
         }
 
-        public Usuario(int edad, ESexo genero) : this()
+        public Usuario(int edad, EGenero genero) : this()
         {
             this.edad = edad;
             this.genero = genero;
@@ -43,7 +45,7 @@ namespace Entidades
             get { return this.edad; }
             set { this.edad = value; }
         }
-        public ESexo Genero
+        public EGenero Genero
         {
             get { return this.genero; }
             set
@@ -51,5 +53,7 @@ namespace Entidades
                 this.genero = value;
             }
         }
+       
+
     }
 }

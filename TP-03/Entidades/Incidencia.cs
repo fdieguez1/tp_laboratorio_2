@@ -7,7 +7,7 @@ using Entidades.Interfaces;
 
 namespace Entidades
 {
-    public class Incidencia : IRentable<Incidencia>
+    public class Incidencia : IRegistrable<Incidencia>
     {
         static int prevId;
         private int id;
@@ -52,12 +52,12 @@ namespace Entidades
         }
 
 
-        public bool Alquilar(Incidencia objeto)
+        public bool Registrar(Incidencia objeto)
         {
             return NucleoDelSistema.Incidencias + objeto;
         }
 
-        public bool Devolver(Incidencia objeto)
+        public bool Cerrar(Incidencia objeto)
         {
             return NucleoDelSistema.Incidencias - objeto;
         }

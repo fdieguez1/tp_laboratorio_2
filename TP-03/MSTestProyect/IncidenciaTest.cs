@@ -15,7 +15,7 @@ namespace MSTestProyect
         [TestMethod]
         public void TestCargaIncidencia()
         {
-            Usuario auxUser = new Usuario(20, ESexo.Masculino);
+            Usuario auxUser = new Usuario(20, EGenero.Masculino);
             List<ErrorDetalle<int, string, DateTime>> errorDescriptions = new List<ErrorDetalle<int, string, DateTime>>();
             errorDescriptions.Add(new ErrorDetalle<int, string, DateTime>(1, "No se encontro la referencia al objeto", DateTime.Now));
 
@@ -26,7 +26,7 @@ namespace MSTestProyect
             Assert.IsNotNull(NucleoDelSistema.Incidencias[0]);
             Assert.IsTrue(NucleoDelSistema.Incidencias[0].Id == 1);
             Assert.IsTrue(NucleoDelSistema.Incidencias[0].Usuario.Edad == 20);
-            Assert.IsTrue(NucleoDelSistema.Incidencias[0].Usuario.Genero == ESexo.Masculino);
+            Assert.IsTrue(NucleoDelSistema.Incidencias[0].Usuario.Genero == EGenero.Masculino);
         }
         /// <summary>
         /// Prueba de cierre de incidencia, se debe cargar una incidencia y luego cambiar el estado de la misma a cerrada, utilizando la sobrecarga del operador -
@@ -35,7 +35,7 @@ namespace MSTestProyect
         public void TestCerrarIncidencia()
         {
             NucleoDelSistema.Incidencias.Clear();
-            Usuario auxUser = new Usuario(20, ESexo.Masculino);
+            Usuario auxUser = new Usuario(20, EGenero.Masculino);
             List<ErrorDetalle<int, string, DateTime>> errorDescriptions = new List<ErrorDetalle<int, string, DateTime>>();
             errorDescriptions.Add(new ErrorDetalle<int, string, DateTime>(1, "No se encontro la referencia al objeto", DateTime.Now));
 

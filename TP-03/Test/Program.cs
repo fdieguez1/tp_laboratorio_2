@@ -12,10 +12,12 @@ namespace Test
     {
         static void Main()
         {
+            NucleoDelSistema instanciaCore = new NucleoDelSistema();
+
             //Random a utilizar
             Random Rnd = new Random();
             //conteo de variantes de tipo de error
-            int conteoSexos = Enum.GetNames(typeof(ESexo)).Length;
+            int conteoSexos = Enum.GetNames(typeof(EGenero)).Length;
             int conteoTipo = Enum.GetNames(typeof(ETipo)).Length;
 
             ErrorDetalle<int, string, DateTime> auxErrorDetalle;
@@ -24,22 +26,32 @@ namespace Test
             Usuario auxUsuario;
             Error auxError;
 
-            //Instancio 10 usuarios para relacionar con los errores a modo de prueba con valores aleatorios
-            int conteoClientes;
-            for (conteoClientes = 0; conteoClientes < 10; conteoClientes++)
+            if (instanciaCore.FileExists("\\ArchivoJson.json"))
             {
-                NucleoDelSistema.Usuarios.Add(new Usuario(Rnd.Next(10, 45), (ESexo)Rnd.Next(0, conteoSexos)));
+                //Leo los usuarios del archivo
+                NucleoDelSistema.Usuarios.AddRange(instanciaCore.LeerArchivoJson($"{NucleoDelSistema.userFilesPath}\\ArchivoJson.json"));
+                Console.WriteLine($"Leidos {NucleoDelSistema.Usuarios.Count} usuarios");
             }
-            Console.WriteLine($"Cargados {conteoClientes} usuarios");
+            else
+            {
+                //Instancio 100 usuarios para relacionar con los errores a modo de prueba con valores aleatorios
+
+                int conteoUsuarios;
+                for (conteoUsuarios = 0; conteoUsuarios < 100; conteoUsuarios++)
+                {
+                    NucleoDelSistema.Usuarios.Add(new Usuario(Rnd.Next(10, 45), (EGenero)Rnd.Next(0, conteoSexos)));
+                }
+                Console.WriteLine($"Instanciados {conteoUsuarios} usuarios");
+            }
 
             List<string> errorTitles = new List<string>()
             {
                 "Null reference error", "App not responding", "Connection lost", "Stack overflow exception", "Input string was not in the correct format"
             };
 
-            //Instancio 10 errores a modo de prueba con valores aleatorios
+            //Instancio 100 errores a modo de prueba con valores aleatorios
             int errorCount;
-            for (errorCount = 0; errorCount < 10; errorCount++)
+            for (errorCount = 0; errorCount < 100; errorCount++)
             {
                 errorDescriptions = new List<ErrorDetalle<int, string, DateTime>>();
                 for (int p = 0; p < 3; p++)
@@ -48,11 +60,11 @@ namespace Test
                 }
                 NucleoDelSistema.Errores.Add(new Error(errorTitles[Rnd.Next(0, errorTitles.Count)], errorDescriptions, (ETipo)Rnd.Next(0, conteoTipo)));
             }
-            Console.WriteLine($"Cargados {errorCount} errores");
+            Console.WriteLine($"Instanciados {errorCount} errores");
 
-            //Instancio 11 incidencias que son la entidad que relaciona errores con usuarios
+            //Instancio 101 incidencias que son la entidad que relaciona errores con usuarios
             int incidencesCount;
-            for (incidencesCount = 0; incidencesCount < 11; incidencesCount++)
+            for (incidencesCount = 0; incidencesCount < 101; incidencesCount++)
             {
                 auxUsuario = NucleoDelSistema.Usuarios[Rnd.Next(0, NucleoDelSistema.Usuarios.Count)];
                 auxError = NucleoDelSistema.Errores[Rnd.Next(0, NucleoDelSistema.Errores.Count)];
@@ -74,16 +86,16 @@ namespace Test
                 }
 
             }
-            Console.WriteLine($"Cargadas {incidencesCount} incidencias\n");
+            Console.WriteLine($"Instanciadas {incidencesCount} incidencias\n");
 
             int conteoIncidencias = NucleoDelSistema.Incidencias.Count;
 
             //Utilizo un metodo propio que hace uso de genericos, interfaces y delegados (intenta hacer lo mismo que un Where de LINQ)
             int conteoMayores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Edad > 17).Count();
             int conteoMenores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Edad <= 17 && x.Error.Tipo.EsBloqueante()).Count();
-            int conteoMasculinosMenores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == ESexo.Masculino && x.Usuario.Edad <= 17).Count();
-            int conteoFemeninosMayores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == ESexo.Femenino && x.Usuario.Edad > 17).Count();
-            int conteoNoBinariosConCrash = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == ESexo.NoBinario && x.Error.Tipo == ETipo.Crash).Count();
+            int conteoMasculinosMenores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == EGenero.Masculino && x.Usuario.Edad <= 17).Count();
+            int conteoFemeninosMayores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == EGenero.Femenino && x.Usuario.Edad > 17).Count();
+            int conteoNoBinariosConCrash = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == EGenero.NoBinario && x.Error.Tipo == ETipo.Crash).Count();
 
             //Metodo de extension de int para calcular un porcentaje, dado un segundo parametro tambien de tipo int.
             float porcentajeMayores = conteoIncidencias.CalcularPorcentaje(conteoMayores);
@@ -105,6 +117,14 @@ namespace Test
             Console.WriteLine($"Porcentaje de errores bloqueantes: {porcentajeBloqueantes:0.00}%");
             Console.WriteLine($"Porcentaje de errores no bloqueantes: {porcentajeNoBloqueantes:0.00}%\n");
 
+            Console.WriteLine("Guardando archivo xml con el ultimo usuario en mis documentos...");
+
+            instanciaCore.EscribirArchivoXml(NucleoDelSistema.Usuarios);
+            Console.WriteLine("Archivo guardado");
+
+            Console.WriteLine("Guardando archivo json con usuarios en mis documentos...");
+            instanciaCore.EscribirArchivoJson(NucleoDelSistema.Usuarios);
+            Console.WriteLine("Archivo guardado");
 
         }
     }

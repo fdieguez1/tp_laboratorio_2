@@ -1,9 +1,12 @@
-﻿namespace Entidades.Interfaces
+﻿using System.Collections.Generic;
+
+namespace Entidades.Interfaces
 {
     public interface IExportable<T>
     {
-        T EscribirArchivo(string path);
-        bool LeerArchivo(T tipo, string path);
-
+        void EscribirArchivoJson(List<T> data);
+        List<T> LeerArchivoJson(string path);
+        void EscribirArchivoXml(List<T> data);
+        List<T> LeerArchivoXml(string path);
     }
 }
