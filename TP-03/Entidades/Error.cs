@@ -1,27 +1,91 @@
-﻿using System.Text;
+﻿using Entidades.Enums;
+using Entidades.Exceptions;
+using Entidades.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Entidades
 {
-    public class Error<T1, T2, T3> where T1 : struct where T3 : struct
+    public class Error
     {
-        readonly T1 titulo;
-        readonly T2 cuerpo;
-        readonly T3 timestamp;
+        static int idAnterior;
+        private int id;
+        private ETipo tipo;
 
-        public Error(T1 pagina, T2 cuerpo, T3 pie)
+        public int Id
         {
-            this.titulo = pagina;
-            this.cuerpo = cuerpo;
-            this.timestamp = pie;
+            get { return this.id; }
+            set
+            {
+                if (value.SoloNumeros())
+                {
+                    this.id = value;
+                }
+                else
+                {
+                    throw new SoloNumerosException("El id debe ser un numero");
+                }
+            }
+        }
+        public ETipo Tipo
+        {
+            get
+            {
+                return this.tipo;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    this.tipo = value;
+                }
+                else
+                {
+                    throw new InvalidETipoException();
+                }
+            }
         }
 
-        public override string ToString()
+        string titulo;
+        List<ErrorDetalle<int, string, DateTime>> contenido;
+        static Error()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"\nPágina: {this.titulo}");
-            sb.AppendLine($"\nTexto: {this.cuerpo}");
-            sb.AppendLine($"\n\n{this.timestamp}\n");
-            return sb.ToString();
+            idAnterior = 0;
+        }
+
+        public string Titulo
+        {
+            get
+            {
+                return this.titulo;
+            }
+            set
+            {
+                this.titulo = value;
+            }
+        }
+        public List<ErrorDetalle<int, string, DateTime>> Contenido
+        {
+            get
+            {
+                return this.contenido;
+            }
+            set
+            {
+                this.contenido = value;
+            }
+        }
+
+        private Error(string title, ETipo tipo)
+        {
+            this.id = ++idAnterior;
+            this.titulo = title;
+            this.tipo = tipo;
+        }
+
+        public Error(string title, List<ErrorDetalle<int, string, DateTime>> content, ETipo tipo) : this(title, tipo)
+        {
+            this.contenido = content;
         }
     }
 }

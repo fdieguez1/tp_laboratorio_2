@@ -1,14 +1,20 @@
-﻿using Entidades.Exceptions;
-using Entidades.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Entidades.Enums;
+using Entidades.Exceptions;
+using Entidades.Extensions;
+using Entidades.Interfaces;
 
 namespace Entidades
 {
-    public class Incidencia
+    public class Incidencia : IRentable<Incidencia>
     {
-        static int idAnterior;
+        static int prevId;
         private int id;
+        private Usuario usuario;
+        private Error error;
+        private EEstado estado;
+
 
         public int Id
         {
@@ -21,34 +27,145 @@ namespace Entidades
                     throw new SoloNumerosException("El id debe ser un numero");
             }
         }
+        public EEstado Estado
+        {
+            get
+            {
+                return this.estado;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    this.estado = value;
+                }
+                else
+                {
+                    throw new InvalidEEstadoException();
+                }
+            }
+        }
 
-        string titulo;
-        List<Error<int, string, DateTime>> contenido;
         static Incidencia()
         {
-            idAnterior = 0;
+            prevId = 0;
         }
 
-        public string Titulo
+
+        public bool Alquilar(Incidencia objeto)
         {
-            get { return this.titulo; }
-            set { this.titulo = value; }
-        }
-        public List<Error<int, string, DateTime>> Contenido
-        {
-            get { return this.contenido; }
-            set { this.contenido = value; }
+            return NucleoDelSistema.Incidencias + objeto;
         }
 
-        private Incidencia(string title)
+        public bool Devolver(Incidencia objeto)
         {
-            this.id = ++idAnterior;
-            this.titulo = title;
+            return NucleoDelSistema.Incidencias - objeto;
         }
 
-        public Incidencia(string title, List<Error<int, string, DateTime>> content) : this(title)
+
+        public Usuario Usuario
         {
-            this.contenido = content;
+            get
+            {
+                return this.usuario;
+            }
+            set
+            {
+                this.usuario = value;
+            }
+        }
+        public Error Error
+        {
+            get
+            {
+                return this.error;
+            }
+            set
+            {
+                this.error = value;
+            }
+        }
+        private Incidencia()
+        {
+            this.id = ++prevId;
+            this.estado = EEstado.Abierta;
+        }
+        public Incidencia(Usuario client, Error error) : this()
+        {
+            this.usuario = client;
+            this.error = error;
+        }
+
+        public static bool operator +(List<Incidencia> incidencias, Incidencia incidencia)
+        {
+            if (incidencias == null)
+            {
+                throw new NullReferenceException("Se necesitan una lista de alquileres para cargar un prestamo");
+            }
+            if (incidencia == null)
+            {
+                throw new NullReferenceException("Se necesita un libro para realizar la carga del prestamo");
+            }
+            if (incidencias != incidencia)
+            {
+                incidencias.Add(incidencia);
+                return true;
+            }
+            else
+            {
+                throw new IncidenceLoadException();
+            }
+        }
+        public static bool operator -(List<Incidencia> incidencias, Incidencia incidencia)
+        {
+            if (incidencias == null)
+            {
+                throw new NullReferenceException("Se necesitan una lista de incidencias para efectuar una cierre");
+            }
+            if (incidencia == null)
+            {
+                throw new NullReferenceException("Se necesita un error para realizar el cierre");
+            }
+            if (incidencias.Count < 0)
+            {
+                throw new Exception("No hay incidencias, no se puede cerrar nada");
+            }
+            foreach (Incidencia item in incidencias)
+            {
+                if (item == incidencia)
+                {
+                    item.Estado = EEstado.Cerrada;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public static bool operator ==(List<Incidencia> incidencias, Incidencia incidencia)
+        {
+            foreach (Incidencia item in incidencias)
+            {
+                if (item.Id == incidencia.Id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public static bool operator !=(List<Incidencia> incidencias, Incidencia incidencia)
+        {
+            return !(incidencias == incidencia);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if ((Incidencia)obj == this)
+                return true;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

@@ -4,11 +4,11 @@ namespace Entidades
 {
     public class NucleoDelSistema
     {
-        private static List<Registro> registros;
-        public static List<Registro> Registros
+        private static List<Incidencia> incidencias;
+        public static List<Incidencia> Incidencias
         {
-            get { return registros; }
-            set { registros = value; }
+            get { return incidencias; }
+            set { incidencias = value; }
         }
 
         private static List<Usuario> usuarios;
@@ -18,17 +18,17 @@ namespace Entidades
             set { usuarios = value; }
         }
 
-        private static List<Incidencia> incidencias;
-        public static List<Incidencia> Incidencias
+        private static List<Error> errores;
+        public static List<Error> Errores
         {
-            get { return incidencias; }
-            set { incidencias = value; }
+            get { return errores; }
+            set { errores = value; }
         }
         static NucleoDelSistema()
         {
-            Registros = new List<Registro>();
-            Usuarios = new List<Usuario>();
             Incidencias = new List<Incidencia>();
+            Usuarios = new List<Usuario>();
+            Errores = new List<Error>();
         }
     }
 }

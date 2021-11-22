@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entidades.Enums
 {
-    public enum EEstado
+    public enum ESexo
     {
-        Abierta,
-        Cerrada
+        Masculino,
+        Femenino,
+        NoBinario
     }
 }

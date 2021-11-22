@@ -4,12 +4,12 @@ using Entidades.Extensions;
 
 namespace Entidades
 {
-    public sealed class Cliente
+    public sealed class Usuario
     {
         static int idAnterior;
         int id;
         int edad;
-        ETipo genero;
+        ESexo genero;
         public int Id
         {
             get { return this.id; }
@@ -22,17 +22,17 @@ namespace Entidades
             }
         }
 
-        static Cliente()
+        static Usuario()
         {
             idAnterior = 0;
         }
 
-        private Cliente()
+        private Usuario()
         {
             this.Id = ++idAnterior;
         }
 
-        public Cliente(int edad, ETipo genero) : this()
+        public Usuario(int edad, ESexo genero) : this()
         {
             this.edad = edad;
             this.genero = genero;
@@ -43,7 +43,7 @@ namespace Entidades
             get { return this.edad; }
             set { this.edad = value; }
         }
-        public ETipo Genero
+        public ESexo Genero
         {
             get { return this.genero; }
             set

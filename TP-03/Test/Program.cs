@@ -1,5 +1,7 @@
 ﻿using Entidades;
 using Entidades.Enums;
+using Entidades.Exceptions;
+using Entidades.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,49 +12,99 @@ namespace Test
     {
         static void Main()
         {
+            //Random a utilizar
             Random Rnd = new Random();
-            int conteoGeneros = Enum.GetNames(typeof(ETipo)).Length;
-            
-            Error<int, string, DateTime> auxPagina;
-            List<Error<int, string, DateTime>> paginas;
+            //conteo de variantes de tipo de error
+            int conteoSexos = Enum.GetNames(typeof(ESexo)).Length;
+            int conteoTipo = Enum.GetNames(typeof(ETipo)).Length;
 
-            Usuario auxCliente;
-            Incidencia auxLibro;
+            ErrorDetalle<int, string, DateTime> auxErrorDetalle;
+            List<ErrorDetalle<int, string, DateTime>> errorDescriptions;
 
+            Usuario auxUsuario;
+            Error auxError;
+
+            //Instancio 10 usuarios para relacionar con los errores a modo de prueba con valores aleatorios
             int conteoClientes;
             for (conteoClientes = 0; conteoClientes < 10; conteoClientes++)
             {
-                NucleoDelSistema.Usuarios.Add(new Usuario(Rnd.Next(15, 45), (ETipo)Rnd.Next(0, conteoGeneros)));
+                NucleoDelSistema.Usuarios.Add(new Usuario(Rnd.Next(10, 45), (ESexo)Rnd.Next(0, conteoSexos)));
             }
-            Console.WriteLine($"Cargados {conteoClientes} clientes");
+            Console.WriteLine($"Cargados {conteoClientes} usuarios");
 
-            List<string> bookNames = new List<string>()
+            List<string> errorTitles = new List<string>()
             {
-                "Don Quijote", "Historia de dos ciudades", "El señor de los anillos", "El Principito", "El Hobbit"
+                "Null reference error", "App not responding", "Connection lost", "Stack overflow exception", "Input string was not in the correct format"
             };
 
-            int bookCount;
-            for (bookCount = 0; bookCount < 20; bookCount++)
+            //Instancio 10 errores a modo de prueba con valores aleatorios
+            int errorCount;
+            for (errorCount = 0; errorCount < 10; errorCount++)
             {
-                paginas = new List<Error<int, string, DateTime>>();
+                errorDescriptions = new List<ErrorDetalle<int, string, DateTime>>();
                 for (int p = 0; p < 3; p++)
                 {
-                    auxPagina = new Error<int, string, DateTime>(p, Guid.NewGuid().ToString(), DateTime.Now);
+                    auxErrorDetalle = new ErrorDetalle<int, string, DateTime>(p, Guid.NewGuid().ToString(), DateTime.Now);
                 }
-                NucleoDelSistema.Incidencias.Add(new Incidencia(bookNames[Rnd.Next(0, bookNames.Count)], paginas));
+                NucleoDelSistema.Errores.Add(new Error(errorTitles[Rnd.Next(0, errorTitles.Count)], errorDescriptions, (ETipo)Rnd.Next(0, conteoTipo)));
             }
-            Console.WriteLine($"Cargados {bookCount} libros");
+            Console.WriteLine($"Cargados {errorCount} errores");
 
-            int rentalsCount;
-            for (rentalsCount = 0; rentalsCount < 10; rentalsCount++)
+            //Instancio 11 incidencias que son la entidad que relaciona errores con usuarios
+            int incidencesCount;
+            for (incidencesCount = 0; incidencesCount < 11; incidencesCount++)
             {
-                auxCliente = NucleoDelSistema.Usuarios[Rnd.Next(0, NucleoDelSistema.Usuarios.Count)];
-                auxLibro = NucleoDelSistema.Incidencias[Rnd.Next(0, NucleoDelSistema.Usuarios.Count)];
-                NucleoDelSistema.Registros.Add(new Registro(auxCliente, auxLibro));
-            }
-            Console.WriteLine($"Cargados {rentalsCount} alquileres");
+                auxUsuario = NucleoDelSistema.Usuarios[Rnd.Next(0, NucleoDelSistema.Usuarios.Count)];
+                auxError = NucleoDelSistema.Errores[Rnd.Next(0, NucleoDelSistema.Errores.Count)];
+                try
+                {
+                    bool funciono = NucleoDelSistema.Incidencias + new Incidencia(auxUsuario, auxError);
+                    if (!funciono)
+                    {
+                        Console.WriteLine("Como llegaste aca?, debería haber ocurrido una excepcion >:(");
+                    }
+                }
+                catch (IncidenceLoadException ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message} \n");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message} \n");
+                }
 
-            List<Registro> TitulosAlquiladosSinRepetir = NucleoDelSistema.Registros.Where(x => x.Client.Edad > 18).ToList();
+            }
+            Console.WriteLine($"Cargadas {incidencesCount} incidencias\n");
+
+            int conteoIncidencias = NucleoDelSistema.Incidencias.Count;
+
+            //Utilizo un metodo propio que hace uso de genericos, interfaces y delegados (intenta hacer lo mismo que un Where de LINQ)
+            int conteoMayores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Edad > 17).Count();
+            int conteoMenores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Edad <= 17 && x.Error.Tipo.EsBloqueante()).Count();
+            int conteoMasculinosMenores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == ESexo.Masculino && x.Usuario.Edad <= 17).Count();
+            int conteoFemeninosMayores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == ESexo.Femenino && x.Usuario.Edad > 17).Count();
+            int conteoNoBinariosConCrash = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == ESexo.NoBinario && x.Error.Tipo == ETipo.Crash).Count();
+
+            //Metodo de extension de int para calcular un porcentaje, dado un segundo parametro tambien de tipo int.
+            float porcentajeMayores = conteoIncidencias.CalcularPorcentaje(conteoMayores);
+            float porcentajeMenores = conteoIncidencias.CalcularPorcentaje(conteoMenores);
+            float porcentajeMasculino = conteoIncidencias.CalcularPorcentaje(conteoMasculinosMenores);
+            float porcentajeFemeninoMayores = conteoIncidencias.CalcularPorcentaje(conteoFemeninosMayores);
+            float porcentajeNoBinarioConCrash = conteoIncidencias.CalcularPorcentaje(conteoNoBinariosConCrash);
+
+            Console.WriteLine($"Porcentaje de errores registrados por mayores de edad: {porcentajeMayores:0.00}%");
+            Console.WriteLine($"Porcentaje de errores registrados por menores de edad tipo bloqueantes: {porcentajeMenores:0.00}%\n");
+            Console.WriteLine($"Porcentaje de errores registrados por masculinos menores de edad: {porcentajeMasculino:0.00}%");
+            Console.WriteLine($"Porcentaje de errores registrados por femeninos mayores de edad: {porcentajeFemeninoMayores:0.00}%");
+            Console.WriteLine($"Porcentaje de errores del tipo Crash registrados por no binarios: {porcentajeNoBinarioConCrash:0.00}%\n");
+
+            int conteoBloqueantes = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Error.Tipo.EsBloqueante()).Count();
+            int conteoNoBloqueantes = NucleoDelSistema.Incidencias.FiltrarColleccion(x => !x.Error.Tipo.EsBloqueante()).Count();
+            float porcentajeBloqueantes = conteoIncidencias.CalcularPorcentaje(conteoBloqueantes);
+            float porcentajeNoBloqueantes = conteoIncidencias.CalcularPorcentaje(conteoNoBloqueantes);
+            Console.WriteLine($"Porcentaje de errores bloqueantes: {porcentajeBloqueantes:0.00}%");
+            Console.WriteLine($"Porcentaje de errores no bloqueantes: {porcentajeNoBloqueantes:0.00}%\n");
+
 
         }
     }
