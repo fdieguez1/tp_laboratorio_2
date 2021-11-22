@@ -29,9 +29,9 @@ namespace FormsProyect
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -42,6 +42,8 @@ namespace FormsProyect
             this.dgvUsers = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnUsuariosDb = new System.Windows.Forms.Button();
+            this.btnCleanDb = new System.Windows.Forms.Button();
             this.btnCloseApp = new System.Windows.Forms.Button();
             this.btnSeeStatistics = new System.Windows.Forms.Button();
             this.btnCloseIncidence = new System.Windows.Forms.Button();
@@ -86,36 +88,36 @@ namespace FormsProyect
             this.dgvIncidences.AllowUserToAddRows = false;
             this.dgvIncidences.AllowUserToDeleteRows = false;
             this.dgvIncidences.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Navy;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Navy;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvIncidences.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Navy;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Navy;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvIncidences.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvIncidences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvIncidences.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvIncidences.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvIncidences.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvIncidences.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvIncidences.GridColor = System.Drawing.Color.Black;
             this.dgvIncidences.Location = new System.Drawing.Point(0, 378);
             this.dgvIncidences.Name = "dgvIncidences";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvIncidences.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvIncidences.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvIncidences.RowTemplate.Height = 25;
             this.dgvIncidences.Size = new System.Drawing.Size(547, 150);
             this.dgvIncidences.TabIndex = 5;
@@ -186,6 +188,8 @@ namespace FormsProyect
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.btnUsuariosDb);
+            this.panel2.Controls.Add(this.btnCleanDb);
             this.panel2.Controls.Add(this.btnCloseApp);
             this.panel2.Controls.Add(this.btnSeeStatistics);
             this.panel2.Controls.Add(this.btnCloseIncidence);
@@ -194,6 +198,34 @@ namespace FormsProyect
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(546, 40);
             this.panel2.TabIndex = 2;
+            // 
+            // btnUsuariosDb
+            // 
+            this.btnUsuariosDb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnUsuariosDb.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnUsuariosDb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUsuariosDb.ForeColor = System.Drawing.Color.White;
+            this.btnUsuariosDb.Location = new System.Drawing.Point(328, 0);
+            this.btnUsuariosDb.Name = "btnUsuariosDb";
+            this.btnUsuariosDb.Size = new System.Drawing.Size(93, 40);
+            this.btnUsuariosDb.TabIndex = 5;
+            this.btnUsuariosDb.Text = "Enviar usuarios a Db";
+            this.btnUsuariosDb.UseVisualStyleBackColor = false;
+            this.btnUsuariosDb.Click += new System.EventHandler(this.btnUsuariosDb_Click);
+            // 
+            // btnCleanDb
+            // 
+            this.btnCleanDb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btnCleanDb.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCleanDb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCleanDb.ForeColor = System.Drawing.Color.White;
+            this.btnCleanDb.Location = new System.Drawing.Point(235, 0);
+            this.btnCleanDb.Name = "btnCleanDb";
+            this.btnCleanDb.Size = new System.Drawing.Size(93, 40);
+            this.btnCleanDb.TabIndex = 4;
+            this.btnCleanDb.Text = "Limpiar BD";
+            this.btnCleanDb.UseVisualStyleBackColor = false;
+            this.btnCleanDb.Click += new System.EventHandler(this.btnCleanDb_Click);
             // 
             // btnCloseApp
             // 
@@ -217,7 +249,7 @@ namespace FormsProyect
             this.btnSeeStatistics.ForeColor = System.Drawing.Color.White;
             this.btnSeeStatistics.Location = new System.Drawing.Point(150, 0);
             this.btnSeeStatistics.Name = "btnSeeStatistics";
-            this.btnSeeStatistics.Size = new System.Drawing.Size(128, 40);
+            this.btnSeeStatistics.Size = new System.Drawing.Size(85, 40);
             this.btnSeeStatistics.TabIndex = 2;
             this.btnSeeStatistics.Text = "Ver estadisticas";
             this.btnSeeStatistics.UseVisualStyleBackColor = false;
@@ -293,6 +325,8 @@ namespace FormsProyect
         private System.Windows.Forms.Button btnCloseIncidence;
         private System.Windows.Forms.Button btnAddIncidence;
         private System.Windows.Forms.Button btnCloseApp;
+        private System.Windows.Forms.Button btnCleanDb;
+        private System.Windows.Forms.Button btnUsuariosDb;
     }
 }
 

@@ -32,6 +32,9 @@ namespace FormsProyect
                 return instance;
             }
         }
+        public DB dbContext = new DB("Data Source=.;Initial Catalog=UTN;Integrated Security=True");
+
+
         private delegate void Callback(object sender, EventArgs e);
         public MainForm()
         {
@@ -133,6 +136,16 @@ namespace FormsProyect
         {
             //Invoco al evento al activar el form
             OnRefreshInterface?.Invoke(sender, e);
+        }
+
+        private void btnCleanDb_Click(object sender, EventArgs e)
+        {
+            dbContext.DeleteAllUsers();
+        }
+
+        private void btnUsuariosDb_Click(object sender, EventArgs e)
+        {
+            dbContext.Post(NucleoDelSistema.Usuarios);
         }
     }
 }
