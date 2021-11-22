@@ -3,6 +3,7 @@ using Entidades.Exceptions;
 using Entidades.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Entidades
 {
@@ -86,6 +87,12 @@ namespace Entidades
         public Error(string title, List<ErrorDetalle<int, string, DateTime>> content, ETipo tipo) : this(title, tipo)
         {
             this.contenido = content;
+        }
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"Id:{this.Id} - {this.Tipo}");
+            return sb.ToString();
         }
     }
 }

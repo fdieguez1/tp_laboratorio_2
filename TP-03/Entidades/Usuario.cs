@@ -2,7 +2,7 @@
 using Entidades.Exceptions;
 using Entidades.Extensions;
 using System;
-
+using System.Text;
 
 namespace Entidades
 {
@@ -53,7 +53,13 @@ namespace Entidades
                 this.genero = value;
             }
         }
-       
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"Id:{this.Id} - {this.Edad}, {this.Genero}");
+            return sb.ToString();
+        }
+
 
     }
 }

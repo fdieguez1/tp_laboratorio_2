@@ -90,9 +90,9 @@ namespace Entidades
             this.id = ++prevId;
             this.estado = EEstado.Abierta;
         }
-        public Incidencia(Usuario client, Error error) : this()
+        public Incidencia(Usuario user, Error error) : this()
         {
-            this.usuario = client;
+            this.usuario = user;
             this.error = error;
         }
 
