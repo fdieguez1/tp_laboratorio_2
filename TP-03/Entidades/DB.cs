@@ -56,9 +56,9 @@ namespace Entidades
                     users.Add(auxUser);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
+                throw;
             }
             finally
             {
@@ -66,7 +66,7 @@ namespace Entidades
             }
             return users;
         }
-        public List<Usuario> Post(List<Usuario> data)
+        public void Post(List<Usuario> data)
         {
             string consulta = string.Empty;
             foreach (Usuario user in data)
@@ -75,29 +75,19 @@ namespace Entidades
             }
             SqlConnection conection = new SqlConnection(this.connectionString);
             SqlCommand command = new SqlCommand(consulta, conection);
-            List<Usuario> users = new List<Usuario>();
             try
             {
                 conection.Open();
                 SqlDataReader sqlDataReader = command.ExecuteReader();
-                while (sqlDataReader.Read())
-                {
-                    auxUser = new Usuario();
-                    auxUser.Id = (int)sqlDataReader["Id"];
-                    auxUser.Edad = (int)sqlDataReader["Edad"];
-                    auxUser.Genero = (EGenero)sqlDataReader["Genero"];
-                    users.Add(auxUser);
-                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
+                throw;
             }
             finally
             {
                 conection.Close();
             }
-            return users;
         }
         public void DeleteAllUsers()
         {
@@ -109,9 +99,9 @@ namespace Entidades
                 conection.Open();
                 SqlDataReader sqlDataReader = command.ExecuteReader();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
+                throw;
             }
             finally
             {

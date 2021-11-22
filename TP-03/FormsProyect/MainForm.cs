@@ -32,7 +32,10 @@ namespace FormsProyect
                 return instance;
             }
         }
-        public DB dbContext = new DB("Data Source=.;Initial Catalog=UTN;Integrated Security=True");
+        /// <summary>
+        /// Instancio la conexion a la DB pasandole un connection string
+        /// </summary>
+        public DB dbContext = new DB("Data Source=.;Initial Catalog=UTN;Integrated Security=True;TimeOut=3");
 
 
         private delegate void Callback(object sender, EventArgs e);
@@ -140,12 +143,35 @@ namespace FormsProyect
 
         private void btnCleanDb_Click(object sender, EventArgs e)
         {
-            dbContext.DeleteAllUsers();
+            Task.Run(() =>
+            {
+                try
+                {
+                    dbContext.DeleteAllUsers();
+                    MessageBox.Show("Limpieza de usuarios en la DB correcta");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ocurrio un problema al limpiar la base, Exception: {ex.Message}", "Error en la DB");
+                }
+            });
+
         }
 
         private void btnUsuariosDb_Click(object sender, EventArgs e)
         {
-            dbContext.Post(NucleoDelSistema.Usuarios);
+            Task.Run(() =>
+            {
+                try
+                {
+                    dbContext.Post(NucleoDelSistema.Usuarios);
+                    MessageBox.Show("Carga de usuarios en la DB correcta");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ocurrio un problema al cargar usuarios a la base, Exception: {ex.Message}", "Error en la DB");
+                }
+            });
         }
     }
 }
