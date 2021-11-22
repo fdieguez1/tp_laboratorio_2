@@ -31,6 +31,7 @@ namespace FormsProyect
             if (statisticsLogs.Count > 0)
             {
                 NucleoDelSistema.Instance.EscribirArchivoJson(statisticsLogs);
+                MessageBox.Show($"Guardado de estadisticas exitoso en ruta: {NucleoDelSistema.UserFilesPath}");
             }
         }
 
@@ -63,9 +64,16 @@ namespace FormsProyect
             int conteoBloqueantes = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Error.Tipo.EsBloqueante()).Count();
             int conteoNoBloqueantes = NucleoDelSistema.Incidencias.FiltrarColleccion(x => !x.Error.Tipo.EsBloqueante()).Count();
             float porcentajeBloqueantes = conteoIncidencias.CalcularPorcentaje(conteoBloqueantes);
+            statisticsLogs.Add($"Porcentaje de errores bloqueantes: {porcentajeBloqueantes:0.00}%");
             float porcentajeNoBloqueantes = conteoIncidencias.CalcularPorcentaje(conteoNoBloqueantes);
+            statisticsLogs.Add($"Porcentaje de errores no bloqueantes: {porcentajeNoBloqueantes:0.00}%");
 
             lbxEstadisticas.DataSource = statisticsLogs;
+        }
+
+        private void btnCancel_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

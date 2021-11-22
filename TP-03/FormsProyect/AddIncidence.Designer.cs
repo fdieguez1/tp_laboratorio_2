@@ -29,6 +29,7 @@ namespace FormsProyect
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddIncidence));
             this.dgvErrors = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
@@ -147,9 +148,10 @@ namespace FormsProyect
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dgvUsers);
             this.Controls.Add(this.label2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddIncidence";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddIncidence";
+            this.Text = "Agregar incidencia";
             this.Load += new System.EventHandler(this.AddIncidence_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvErrors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();

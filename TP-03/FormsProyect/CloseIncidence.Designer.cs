@@ -32,6 +32,7 @@ namespace FormsProyect
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CloseIncidence));
             this.dgvIncidences = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -140,9 +141,10 @@ namespace FormsProyect
             this.Controls.Add(this.pBtns);
             this.Controls.Add(this.dgvIncidences);
             this.Controls.Add(this.label4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CloseIncidence";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CloseIncidence";
+            this.Text = "Cerrar incidencia";
             this.Load += new System.EventHandler(this.CloseIncidence_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvIncidences)).EndInit();
             this.pBtns.ResumeLayout(false);

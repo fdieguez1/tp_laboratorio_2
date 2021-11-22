@@ -32,10 +32,10 @@ namespace Entidades
             }
         }
 
-        public static string userFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string UserFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public bool FileExists(string nombreArchivo)
         {
-            return File.Exists($"{userFilesPath}{nombreArchivo}");
+            return File.Exists($"{UserFilesPath}{nombreArchivo}");
         }
 
         private static List<Incidencia> incidencias;
@@ -68,7 +68,7 @@ namespace Entidades
         {
             try
             {
-                string path = $"{userFilesPath}\\ArchivoJson.json";
+                string path = $"{UserFilesPath}\\ArchivoJson.json";
                 string jsonString = JsonSerializer.Serialize(data);
                 using (StreamWriter streamWriter = new StreamWriter(path))
                 {
@@ -125,7 +125,7 @@ namespace Entidades
         {
             try
             {
-                using (XmlTextWriter writer = new XmlTextWriter($"{userFilesPath}\\ArchivoXml.xml", Encoding.UTF8))
+                using (XmlTextWriter writer = new XmlTextWriter($"{UserFilesPath}\\ArchivoXml.xml", Encoding.UTF8))
                 {
                     writer.Formatting = Formatting.Indented;
                     XmlSerializer serializer = new XmlSerializer(typeof(List<Usuario>));
@@ -142,7 +142,7 @@ namespace Entidades
         {
             try
             {
-                string path = $"{userFilesPath}\\ArchivoJsonLogs.json";
+                string path = $"{UserFilesPath}\\ArchivoJsonLogs.json";
                 string jsonString = JsonSerializer.Serialize(data);
                 using (StreamWriter streamWriter = new StreamWriter(path))
                 {
@@ -181,7 +181,7 @@ namespace Entidades
         {
             try
             {
-                using (XmlTextWriter writer = new XmlTextWriter($"{userFilesPath}\\ArchivoXmlLogs.xml", Encoding.UTF8))
+                using (XmlTextWriter writer = new XmlTextWriter($"{UserFilesPath}\\ArchivoXmlLogs.xml", Encoding.UTF8))
                 {
                     writer.Formatting = Formatting.Indented;
                     XmlSerializer serializer = new XmlSerializer(typeof(List<string>));
@@ -234,7 +234,7 @@ namespace Entidades
             if (FileExists("\\ArchivoJson.json"))
             {
                 //Leo los usuarios del archivo
-                NucleoDelSistema.Usuarios.AddRange(LeerArchivoJson($"{NucleoDelSistema.userFilesPath}\\ArchivoJson.json"));
+                NucleoDelSistema.Usuarios.AddRange(LeerArchivoJson($"{NucleoDelSistema.UserFilesPath}\\ArchivoJson.json"));
                 Console.WriteLine($"Leidos {NucleoDelSistema.Usuarios.Count} usuarios");
             }
             else

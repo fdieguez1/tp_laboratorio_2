@@ -12,8 +12,11 @@ using System.Windows.Forms;
 
 namespace FormsProyect
 {
+    public delegate void RefreshInterface(object sender, EventArgs e);
     public partial class MainForm : Form
     {
+        //Evento para actualizar los listados del mainform
+        public event RefreshInterface OnRefreshInterface;
         /// <summary>
         /// Singleton del main form para acceder a una unica instancia a lo largo del ciclo de vida de la app
         /// </summary>
@@ -61,6 +64,8 @@ namespace FormsProyect
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvErrors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvIncidences.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            OnRefreshInterface = (sender, e) => { this.Show(); this.Focus(); };
+            OnRefreshInterface += RefreshDataGridViews;
         }
         public void RefreshDataGridViews(object sender, EventArgs e)
         {
@@ -100,39 +105,34 @@ namespace FormsProyect
             Task.Run(() =>
             {
                 Form AddForm = new AddIncidence();
-                DialogResult dialogRes = AddForm.ShowDialog();
-                if (dialogRes != DialogResult.None)
-                {
-                    RefreshDataGridViews(sender, e);
-                }
+                AddForm.ShowDialog();
             });
         }
 
         private void btnCloseIncidence_Click(object sender, EventArgs e)
         {
-            //Corro esto en otro hilo para no bloquear la UI principal, se pueden ejecutar multiples cargas o dejar abierto este dialog y seguir utilizando el hilo principal
+            //Corro esto en otro hilo para no bloquear la UI principal, se pueden ejecutar multiples cierres o dejar abierto este dialog y seguir utilizando el hilo principal
             Task.Run(() =>
             {
                 Form AddForm = new CloseIncidence();
-                DialogResult dialogRes = AddForm.ShowDialog();
-                if (dialogRes != DialogResult.None)
-                {
-                    RefreshDataGridViews(sender, e);
-                }
+                AddForm.ShowDialog();
             });
         }
 
         private void btnSeeStatistics_Click(object sender, EventArgs e)
         {
+            //Corro esto en otro hilo para no bloquear la UI principal, se pueden ejecutar estadisticas o dejar abierto este dialog y seguir utilizando el hilo principal
             Task.Run(() =>
             {
                 Form AddForm = new Statistics();
-                DialogResult dialogRes = AddForm.ShowDialog();
-                if (dialogRes != DialogResult.None)
-                {
-                    RefreshDataGridViews(sender, e);
-                }
+                AddForm.ShowDialog();
             });
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            //Invoco al evento al activar el form
+            OnRefreshInterface?.Invoke(sender, e);
         }
     }
 }

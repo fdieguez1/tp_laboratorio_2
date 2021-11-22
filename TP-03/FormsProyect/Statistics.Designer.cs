@@ -29,6 +29,7 @@ namespace FormsProyect
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Statistics));
             this.label1 = new System.Windows.Forms.Label();
             this.lbxEstadisticas = new System.Windows.Forms.ListBox();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -50,12 +51,13 @@ namespace FormsProyect
             // 
             // lbxEstadisticas
             // 
-            this.lbxEstadisticas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbxEstadisticas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbxEstadisticas.FormattingEnabled = true;
             this.lbxEstadisticas.ItemHeight = 15;
-            this.lbxEstadisticas.Location = new System.Drawing.Point(0, 47);
+            this.lbxEstadisticas.Location = new System.Drawing.Point(12, 47);
             this.lbxEstadisticas.Name = "lbxEstadisticas";
-            this.lbxEstadisticas.Size = new System.Drawing.Size(775, 319);
+            this.lbxEstadisticas.Size = new System.Drawing.Size(751, 319);
             this.lbxEstadisticas.TabIndex = 1;
             // 
             // btnCancel
@@ -64,12 +66,13 @@ namespace FormsProyect
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(700, 0);
+            this.btnCancel.Location = new System.Drawing.Point(676, 0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 48);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click_1);
             // 
             // pBtns
             // 
@@ -77,9 +80,9 @@ namespace FormsProyect
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pBtns.Controls.Add(this.btnCancel);
             this.pBtns.Controls.Add(this.btnConfirm);
-            this.pBtns.Location = new System.Drawing.Point(0, 390);
+            this.pBtns.Location = new System.Drawing.Point(12, 390);
             this.pBtns.Name = "pBtns";
-            this.pBtns.Size = new System.Drawing.Size(775, 48);
+            this.pBtns.Size = new System.Drawing.Size(751, 48);
             this.pBtns.TabIndex = 10;
             // 
             // btnConfirm
@@ -100,12 +103,15 @@ namespace FormsProyect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(775, 450);
             this.Controls.Add(this.pBtns);
             this.Controls.Add(this.lbxEstadisticas);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Statistics";
-            this.Text = "Statistics";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Estadisticas";
             this.Load += new System.EventHandler(this.Statistics_Load);
             this.pBtns.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -12,6 +12,8 @@ namespace Entidades
         static int idAnterior;
         private int id;
         private ETipo tipo;
+        string titulo;
+        List<ErrorDetalle<int, string, DateTime>> contenido;
 
         public int Id
         {
@@ -47,8 +49,7 @@ namespace Entidades
             }
         }
 
-        string titulo;
-        List<ErrorDetalle<int, string, DateTime>> contenido;
+        
         static Error()
         {
             idAnterior = 0;
