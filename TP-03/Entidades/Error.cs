@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase encargada de representar un error, guarda un detalle de error, el cual es una clase que permite la utilizacion de distintos formatos implementando atributos genericos
+    /// </summary>
     public class Error
     {
         static int idAnterior;
@@ -49,12 +52,6 @@ namespace Entidades
             }
         }
 
-        
-        static Error()
-        {
-            idAnterior = 0;
-        }
-
         public string Titulo
         {
             get
@@ -78,6 +75,19 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Constructor estatico, inicializa el id anterior en 0
+        /// </summary>
+        static Error()
+        {
+            idAnterior = 0;
+        }
+
+        /// <summary>
+        /// Constructor de error, necesita un titulo y un tipo para poder ser creado
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="tipo"></param>
         private Error(string title, ETipo tipo)
         {
             this.id = ++idAnterior;
@@ -85,10 +95,18 @@ namespace Entidades
             this.tipo = tipo;
         }
 
+        /// <summary>
+        /// Sobrecarga del constructor de error, agregando el detalle de error con tipos ya especificados
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="content"></param>
+        /// <param name="tipo"></param>
         public Error(string title, List<ErrorDetalle<int, string, DateTime>> content, ETipo tipo) : this(title, tipo)
         {
             this.contenido = content;
         }
+
+        //Sobrecarga del metodo ToString para representar de mejor manera el objeto cuando asi se requiera
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

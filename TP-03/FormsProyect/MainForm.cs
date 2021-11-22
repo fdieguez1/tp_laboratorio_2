@@ -12,6 +12,11 @@ using System.Windows.Forms;
 
 namespace FormsProyect
 {
+    /// <summary>
+    /// delegado que sera utilizado para la carga de un evento que escuchara por actualizaciones en la interfaz (recarga de data grid views)
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public delegate void RefreshInterface(object sender, EventArgs e);
     public partial class MainForm : Form
     {
@@ -37,12 +42,22 @@ namespace FormsProyect
         /// </summary>
         public DB dbContext = new DB("Data Source=.;Initial Catalog=UTN;Integrated Security=True;TimeOut=3");
 
-
+        /// <summary>
+        /// Delegado para utilizar en caso de que se requiera una invocacion de un metodo en otro hilo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private delegate void Callback(object sender, EventArgs e);
         public MainForm()
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Metodo encargado de traer al frente el formulario (No esta funcionando, es un problema relacionado a hilos ya que esperando un momento antes de realizar el focus el formulario se muestra correctamente)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ShowMainForm(object sender, EventArgs e)
         {
             if (this.InvokeRequired)
@@ -73,6 +88,12 @@ namespace FormsProyect
             OnRefreshInterface = (sender, e) => { this.Show(); this.Focus(); };
             OnRefreshInterface += RefreshDataGridViews;
         }
+
+        /// <summary>
+        /// Metodo que carga nuevamente los data grid views con los ultimos valores existentes en el Nucleo del sistema
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void RefreshDataGridViews(object sender, EventArgs e)
         {
             if (this.InvokeRequired)
@@ -141,6 +162,11 @@ namespace FormsProyect
             OnRefreshInterface?.Invoke(sender, e);
         }
 
+        /// <summary>
+        /// Limpia la base de datos de registros de usuarios en la tabla dbo.users, corre en un hilo secundario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCleanDb_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
@@ -158,6 +184,11 @@ namespace FormsProyect
 
         }
 
+        /// <summary>
+        /// Carga en la base de datos registros de usuarios en la tabla dbo.users, corre en un hilo secundario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUsuariosDb_Click(object sender, EventArgs e)
         {
             Task.Run(() =>

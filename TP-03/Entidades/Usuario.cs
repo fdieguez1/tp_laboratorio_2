@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase usuario representa un usuario vinculado a un error, guarda su id, edad y genero
+    /// </summary>
     public class Usuario 
     {
         static int idAnterior;
@@ -53,6 +56,10 @@ namespace Entidades
                 this.genero = value;
             }
         }
+        /// <summary>
+        /// sobrecarga del metodo to string para representar correctamente la entidad cuando asi se requiera
+        /// </summary>
+        /// <returns>string formateado con los datos de la entidad</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

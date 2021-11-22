@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades.Exceptions
 {
+    /// <summary>
+    /// Excepcion que presenta mensajes personalizados para la gestion de archivos
+    /// </summary>
     public class ErrorArchivosException : Exception
     {
         public ErrorArchivosException(string mensaje, Exception innerException) : base(mensaje, innerException)

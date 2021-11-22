@@ -11,6 +11,9 @@ using Entidades.Enums;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase principal donde se guardan los diferentes listados e instancias necesarios para la app, implementa el patron singleton y dos interfaces del tipo IExportable, para guardar usuarios y strings que representan los logs respectivamente.
+    /// </summary>
     public class NucleoDelSistema : IExportable<Usuario>, IExportable<string>
     {
         //Random a utilizar
@@ -32,13 +35,25 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Obtiene la carpeta de mis documentos
+        /// </summary>
         public static string UserFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        /// <summary>
+        /// Verifica que un archivo exista dado un nombre de archivo, en la carpeta de mis documentos
+        /// </summary>
+        /// <param name="nombreArchivo">nombre del archivo</param>
+        /// <returns>true si existe, false si no</returns>
         public bool FileExists(string nombreArchivo)
         {
             return File.Exists($"{UserFilesPath}{nombreArchivo}");
         }
 
         private static List<Incidencia> incidencias;
+        /// <summary>
+        /// Listado de incidencias
+        /// </summary>
         public static List<Incidencia> Incidencias
         {
             get { return incidencias; }
@@ -46,6 +61,9 @@ namespace Entidades
         }
 
         private static List<Usuario> usuarios;
+        /// <summary>
+        /// Listado de usuarios
+        /// </summary>
         public static List<Usuario> Usuarios
         {
             get { return usuarios; }
@@ -53,17 +71,28 @@ namespace Entidades
         }
 
         private static List<Error> errores;
+        /// <summary>
+        /// Listado de errores
+        /// </summary>
         public static List<Error> Errores
         {
             get { return errores; }
             set { errores = value; }
         }
+        /// <summary>
+        /// constructor estatico, inicializa los listados
+        /// </summary>
         static NucleoDelSistema()
         {
             Incidencias = new List<Incidencia>();
             Usuarios = new List<Usuario>();
             Errores = new List<Error>();
         }
+
+        /// <summary>
+        /// implementa la interfaz para escribir archivos del tipo json
+        /// </summary>
+        /// <param name="data">Listado de usuarios a escribir en el archivo</param>
         public void EscribirArchivoJson(List<Usuario> data)
         {
             try
@@ -80,7 +109,10 @@ namespace Entidades
                 throw;
             }
         }
-
+        /// <summary>
+        /// implementa la interfaz para leer archivos del tipo json
+        /// </summary>
+        /// <param name="data">ubicacion del archivo a leer</param>
         public List<Usuario> LeerArchivoJson(string path)
         {
             List<Usuario> auxUsuario;
@@ -103,6 +135,11 @@ namespace Entidades
             return auxUsuario;
         }
 
+        /// <summary>
+        /// Lee un archivo xml dado un path y devuelve un listado de usuarios
+        /// </summary>
+        /// <param name="path">ubicacion del archivo</param>
+        /// <returns>listado de usuarios</returns>
         public List<Usuario> LeerArchivoXml(string path)
         {
             List<Usuario> auxUser = null;
@@ -121,6 +158,10 @@ namespace Entidades
             return auxUser;
         }
 
+        /// <summary>
+        /// Escribe un archivo xml con un listado de usuarios
+        /// </summary>
+        /// <param name="data">listado de usuarios a escribir</param>
         public void EscribirArchivoXml(List<Usuario> data)
         {
             try
@@ -138,6 +179,10 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Escribe un archivo json dada una lista de strings
+        /// </summary>
+        /// <param name="data">lista de strings</param>
         public void EscribirArchivoJson(List<string> data)
         {
             try
@@ -155,6 +200,11 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Leer un archivo json dado un path
+        /// </summary>
+        /// <param name="path">ubicacion del archivo</param>
+        /// <returns>Devuelve una lista de strings </returns>
         List<string> IExportable<string>.LeerArchivoJson(string path)
         {
             List<string> auxLogs;
@@ -177,6 +227,10 @@ namespace Entidades
             return auxLogs;
         }
 
+        /// <summary>
+        /// Escibre un archivo xml con un listado de strings
+        /// </summary>
+        /// <param name="data">listado de strings a escribir</param>
         public void EscribirArchivoXml(List<string> data)
         {
             try
@@ -193,6 +247,11 @@ namespace Entidades
                 throw new ErrorArchivosException("Problema al escribir el archivo", ex);
             }
         }
+        /// <summary>
+        /// Lee un archivo xml y lo interpreta como un listado de strings
+        /// </summary>
+        /// <param name="path">ubicacion del archivo</param>
+        /// <returns>Listado de strings a devolver</returns>
 
         List<string> IExportable<string>.LeerArchivoXml(string path)
         {
@@ -216,9 +275,9 @@ namespace Entidades
         /// <summary>
         /// Metodo de carga de prueba, instancia segun los parametros dados las distintas entidades para el analisis de datos
         /// </summary>
-        /// <param name="cantidadUsuarios"></param>
-        /// <param name="cantidadErrores"></param>
-        /// <param name="cantidadIncidencias"></param>
+        /// <param name="cantidadUsuarios">usuarios a instanciar</param>
+        /// <param name="cantidadErrores">errores a instanciar</param>
+        /// <param name="cantidadIncidencias">incidencias a instanciar</param>
         public void CargaTest(int cantidadUsuarios, int cantidadErrores, int cantidadIncidencias)
         {
             //conteo de variantes de tipo de error

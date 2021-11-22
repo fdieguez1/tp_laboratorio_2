@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades.Enums
 {
+    /// <summary>
+    /// Representa el estado que puede encontrarse una incidencia
+    /// </summary>
     public enum EEstado
     {
         Abierta,

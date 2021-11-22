@@ -10,6 +10,7 @@ namespace Test
 {
     class Program
     {
+        //cargas de prueba y muestra de estadisticas en aplicacion de consola
         static void Main()
         {
             NucleoDelSistema.Instance.CargaTest(10, 10, 11);

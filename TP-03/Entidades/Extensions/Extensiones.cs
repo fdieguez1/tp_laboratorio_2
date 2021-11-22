@@ -12,7 +12,8 @@ namespace Entidades.Extensions
         /// </summary>
         /// <param name="error"></param>
         /// <returns></returns>
-        public static bool EstaRegistrado(this Incidencia incidencia){
+        public static bool EstaRegistrado(this Incidencia incidencia)
+        {
             return NucleoDelSistema.Incidencias == incidencia;
         }
 
@@ -60,8 +61,8 @@ namespace Entidades.Extensions
         /// url del codigo original, devuelve una lazy collection: https://github.com/fdieguez1/TestPixowl/blob/main/Entidades/Ejercicio1/Ejercicio.cs
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="originalCollection"></param>
-        /// <param name="evaluate"></param>
+        /// <param name="originalCollection">collecion a ser evaluada</param>
+        /// <param name="evaluate">delegado a utilizar en la comparacion</param>
         /// <returns></returns>
         public static IEnumerable<T> FiltrarColleccion<T>(this IEnumerable<T> originalCollection, Func<T, bool> evaluate)
         {
@@ -73,12 +74,8 @@ namespace Entidades.Extensions
             {
                 throw new ArgumentNullException(nameof(evaluate));
             }
-            return MyWhere(originalCollection, evaluate);
-        }
-
-        private static Collection<T> MyWhere<T>(this IEnumerable<T> originalCollection, Func<T, bool> evaluate)
-        {
-            Collection<T> col = new();
+            //Uso una collection para poder usar el add, y asi luego retornar la coleccion filtrada del tipo dado
+            Collection<T> col = new Collection<T>();
             foreach (T item in originalCollection)
             {
                 if (evaluate(item))
@@ -89,6 +86,12 @@ namespace Entidades.Extensions
             return col;
         }
 
+        /// <summary>
+        /// Metodo de extension para un int, dado un int como parametro calcula el porcentaje que representa este, en relacion al int que llama a la funcion.
+        /// </summary>
+        /// <param name="total">int original que llama a la funcion</param>
+        /// <param name="cantidadAEvaluar">int a evaluar</param>
+        /// <returns>float porcentaje que representa el segundo en relacion al primero</returns>
         public static float CalcularPorcentaje(this int total, int cantidadAEvaluar)
         {
             return (cantidadAEvaluar * 100 / (float)total);
