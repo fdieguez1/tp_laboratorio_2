@@ -38,7 +38,7 @@ namespace FormsProyect
             if (cargaOk)
             {
                 MessageBox.Show("Carga de incidencia Ok");
-                MainForm.Instance.ShowMainForm(sender, e);
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
@@ -49,6 +49,7 @@ namespace FormsProyect
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }

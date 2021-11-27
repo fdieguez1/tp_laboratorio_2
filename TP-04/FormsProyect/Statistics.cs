@@ -50,9 +50,9 @@ namespace FormsProyect
 
             //Metodo de extension de int para calcular un porcentaje, dado un segundo parametro tambien de tipo int.
             float porcentajeMayores = conteoIncidencias.CalcularPorcentaje(conteoMayores);
-            statisticsLogs.Add($"Porcentaje de mayores con errores: {porcentajeMayores:0.00}%");
+            statisticsLogs.Add($"Porcentaje de mayores de edad con errores: {porcentajeMayores:0.00}%");
             float porcentajeMenoresBloqueante = conteoIncidencias.CalcularPorcentaje(conteoMenoresBloqueante);
-            statisticsLogs.Add($"Porcentaje de menores con error bloqueante: {porcentajeMenoresBloqueante:0.00}%");
+            statisticsLogs.Add($"Porcentaje de menores de edad con error bloqueante: {porcentajeMenoresBloqueante:0.00}%");
 
             float porcentajeMasculinoMenores = conteoIncidencias.CalcularPorcentaje(conteoMasculinosMenores);
             statisticsLogs.Add($"Porcentaje de masculinos menores con errores: {porcentajeMasculinoMenores:0.00}%");
@@ -69,11 +69,21 @@ namespace FormsProyect
             statisticsLogs.Add($"Porcentaje de errores no bloqueantes: {porcentajeNoBloqueantes:0.00}%");
 
             lbxEstadisticas.DataSource = statisticsLogs;
+
+            progressBar1.Value = Convert.ToInt32(porcentajeMayores);
+            progressBar2.Value = Convert.ToInt32(porcentajeMenoresBloqueante);
+            progressBar3.Value = Convert.ToInt32(porcentajeMasculinoMenores);
+            progressBar4.Value = Convert.ToInt32(porcentajeFemeninoMayores);
+            progressBar5.Value = Convert.ToInt32(porcentajeNoBinarioConCrash);
+            progressBar6.Value = Convert.ToInt32(porcentajeBloqueantes);
+            progressBar7.Value = Convert.ToInt32(porcentajeNoBloqueantes);
         }
 
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
+
+       
     }
 }

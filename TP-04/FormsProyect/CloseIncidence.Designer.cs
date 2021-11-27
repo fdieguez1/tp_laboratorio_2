@@ -62,8 +62,8 @@ namespace FormsProyect
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvIncidences.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvIncidences.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -79,6 +79,7 @@ namespace FormsProyect
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvIncidences.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvIncidences.RowTemplate.Height = 25;
+            this.dgvIncidences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvIncidences.Size = new System.Drawing.Size(475, 273);
             this.dgvIncidences.TabIndex = 7;
             // 

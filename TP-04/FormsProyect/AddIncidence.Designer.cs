@@ -29,6 +29,7 @@ namespace FormsProyect
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddIncidence));
             this.dgvErrors = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,11 +51,20 @@ namespace FormsProyect
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvErrors.BackgroundColor = System.Drawing.Color.White;
             this.dgvErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvErrors.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvErrors.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvErrors.GridColor = System.Drawing.Color.Black;
             this.dgvErrors.Location = new System.Drawing.Point(15, 213);
             this.dgvErrors.Name = "dgvErrors";
             this.dgvErrors.RowTemplate.Height = 25;
+            this.dgvErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvErrors.Size = new System.Drawing.Size(504, 150);
             this.dgvErrors.TabIndex = 7;
             // 
@@ -77,6 +87,7 @@ namespace FormsProyect
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvUsers.BackgroundColor = System.Drawing.Color.White;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsers.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvUsers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvUsers.GridColor = System.Drawing.Color.Black;
             this.dgvUsers.Location = new System.Drawing.Point(15, 37);
@@ -84,6 +95,7 @@ namespace FormsProyect
             this.dgvUsers.ReadOnly = true;
             this.dgvUsers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvUsers.RowTemplate.Height = 25;
+            this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsers.Size = new System.Drawing.Size(504, 150);
             this.dgvUsers.TabIndex = 5;
             // 

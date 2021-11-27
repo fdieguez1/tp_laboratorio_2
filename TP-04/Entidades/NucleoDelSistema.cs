@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 using System;
 using Entidades.Exceptions;
 using Entidades.Enums;
+using System.Linq;
 
 namespace Entidades
 {
@@ -18,6 +19,18 @@ namespace Entidades
     {
         //Random a utilizar
         public static Random Rnd = new Random();
+
+        /// <summary>
+        /// Genera un string random utilizando solo las letras disponibles en la cadena, usando Linq
+        /// </summary>
+        /// <param name="length">tamaño de la cadena resultante</param>
+        /// <returns>cadena random resultante (solo letras, mayusculas)</returns>
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[Rnd.Next(s.Length)]).ToArray());
+        }
 
         /// <summary>
         /// Singleton de nucleo del sistema para acceder a una unica instancia a lo largo del ciclo de vida de la app
@@ -303,7 +316,7 @@ namespace Entidades
                 int conteoUsuarios;
                 for (conteoUsuarios = 0; conteoUsuarios < cantidadUsuarios; conteoUsuarios++)
                 {
-                    NucleoDelSistema.Usuarios.Add(new Usuario(Rnd.Next(10, 45), (EGenero)Rnd.Next(0, conteoSexos)));
+                    NucleoDelSistema.Usuarios.Add(new Usuario(Rnd.Next(10, 45), (EGenero)Rnd.Next(0, conteoSexos), RandomString(10)));
                 }
                 Console.WriteLine($"Instanciados {conteoUsuarios} usuarios");
             }

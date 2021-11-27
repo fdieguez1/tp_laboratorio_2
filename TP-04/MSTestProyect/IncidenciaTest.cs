@@ -15,7 +15,7 @@ namespace MSTestProyect
         [TestMethod]
         public void TestCargaIncidencia()
         {
-            Usuario auxUser = new Usuario(20, EGenero.Masculino);
+            Usuario auxUser = new Usuario(20, EGenero.Masculino, NucleoDelSistema.RandomString(10));
             List<ErrorDetalle<int, string, DateTime>> errorDescriptions = new List<ErrorDetalle<int, string, DateTime>>();
             errorDescriptions.Add(new ErrorDetalle<int, string, DateTime>(1, "No se encontro la referencia al objeto", DateTime.Now));
 
@@ -35,7 +35,7 @@ namespace MSTestProyect
         public void TestCerrarIncidencia()
         {
             NucleoDelSistema.Incidencias.Clear();
-            Usuario auxUser = new Usuario(20, EGenero.Masculino);
+            Usuario auxUser = new Usuario(20, EGenero.Masculino, NucleoDelSistema.RandomString(10));
             List<ErrorDetalle<int, string, DateTime>> errorDescriptions = new List<ErrorDetalle<int, string, DateTime>>();
             errorDescriptions.Add(new ErrorDetalle<int, string, DateTime>(1, "No se encontro la referencia al objeto", DateTime.Now));
 

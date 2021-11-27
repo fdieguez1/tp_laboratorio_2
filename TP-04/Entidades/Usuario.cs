@@ -10,12 +10,13 @@ namespace Entidades
     /// Clase usuario representa un usuario vinculado a un error, guarda su id, edad y genero
     /// </summary>
     [Serializable]
-    public class Usuario 
+    public class Usuario
     {
         static int idAnterior;
         int id;
         int edad;
         EGenero genero;
+        string nombre;
         public int Id
         {
             get { return this.id; }
@@ -26,6 +27,11 @@ namespace Entidades
                 else
                     throw new SoloNumerosException("El id debe ser un numero");
             }
+        }
+        public string Nombre
+        {
+            get => this.nombre;
+            set => this.nombre = value;
         }
 
         static Usuario()
@@ -38,10 +44,11 @@ namespace Entidades
             this.Id = ++idAnterior;
         }
 
-        public Usuario(int edad, EGenero genero) : this()
+        public Usuario(int edad, EGenero genero, string nombre) : this()
         {
             this.edad = edad;
             this.genero = genero;
+            this.nombre = nombre;
         }
 
         public int Edad
@@ -64,7 +71,7 @@ namespace Entidades
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append($"Id:{this.Id} - {this.Edad}, {this.Genero}");
+            sb.Append($"Id:{this.Id} - {this.Nombre}, {this.Edad}, {this.Genero}");
             return sb.ToString();
         }
 

@@ -126,11 +126,11 @@ namespace Entidades
         {
             if (incidencias == null)
             {
-                throw new NullReferenceException("Se necesitan una lista de alquileres para cargar un prestamo");
+                throw new ArgumentNullException(nameof(incidencias));
             }
             if (incidencia == null)
             {
-                throw new NullReferenceException("Se necesita un libro para realizar la carga del prestamo");
+                throw new ArgumentNullException(nameof(incidencia));
             }
             if (incidencias != incidencia)
             {
@@ -152,11 +152,11 @@ namespace Entidades
         {
             if (incidencias == null)
             {
-                throw new NullReferenceException("Se necesitan una lista de incidencias para efectuar una cierre");
+                throw new ArgumentNullException(nameof(incidencias));
             }
             if (incidencia == null)
             {
-                throw new NullReferenceException("Se necesita un error para realizar el cierre");
+                throw new ArgumentNullException(nameof(incidencia));
             }
             if (incidencias.Count < 0)
             {
