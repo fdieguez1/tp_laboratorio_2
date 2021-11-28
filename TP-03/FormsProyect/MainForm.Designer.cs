@@ -32,6 +32,9 @@ namespace FormsProyect
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -42,6 +45,7 @@ namespace FormsProyect
             this.dgvUsers = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnUsuariosDb = new System.Windows.Forms.Button();
             this.btnCleanDb = new System.Windows.Forms.Button();
             this.btnCloseApp = new System.Windows.Forms.Button();
@@ -62,7 +66,7 @@ namespace FormsProyect
             this.label1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(571, 24);
+            this.label1.Size = new System.Drawing.Size(668, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Sistema de carga y analisis de bugs";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -80,7 +84,7 @@ namespace FormsProyect
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(12, 74);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(547, 553);
+            this.panel1.Size = new System.Drawing.Size(644, 553);
             this.panel1.TabIndex = 1;
             // 
             // dgvIncidences
@@ -99,10 +103,10 @@ namespace FormsProyect
             this.dgvIncidences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvIncidences.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvIncidences.Dock = System.Windows.Forms.DockStyle.Top;
@@ -118,8 +122,11 @@ namespace FormsProyect
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvIncidences.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dgvIncidences.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvIncidences.RowTemplate.Height = 25;
-            this.dgvIncidences.Size = new System.Drawing.Size(547, 150);
+            this.dgvIncidences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvIncidences.Size = new System.Drawing.Size(644, 150);
             this.dgvIncidences.TabIndex = 5;
             // 
             // label4
@@ -127,7 +134,7 @@ namespace FormsProyect
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
             this.label4.Location = new System.Drawing.Point(0, 352);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(547, 26);
+            this.label4.Size = new System.Drawing.Size(644, 26);
             this.label4.TabIndex = 4;
             this.label4.Text = "Incidencias";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -138,13 +145,23 @@ namespace FormsProyect
             this.dgvErrors.AllowUserToDeleteRows = false;
             this.dgvErrors.BackgroundColor = System.Drawing.Color.White;
             this.dgvErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvErrors.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvErrors.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvErrors.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvErrors.GridColor = System.Drawing.Color.Black;
             this.dgvErrors.Location = new System.Drawing.Point(0, 202);
             this.dgvErrors.Name = "dgvErrors";
+            this.dgvErrors.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvErrors.RowTemplate.Height = 25;
-            this.dgvErrors.Size = new System.Drawing.Size(547, 150);
+            this.dgvErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvErrors.Size = new System.Drawing.Size(644, 150);
             this.dgvErrors.TabIndex = 3;
             // 
             // label3
@@ -152,7 +169,7 @@ namespace FormsProyect
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
             this.label3.Location = new System.Drawing.Point(0, 176);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(547, 26);
+            this.label3.Size = new System.Drawing.Size(644, 26);
             this.label3.TabIndex = 2;
             this.label3.Text = "Errores";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -163,6 +180,14 @@ namespace FormsProyect
             this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.BackgroundColor = System.Drawing.Color.White;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.MidnightBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsers.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvUsers.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvUsers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvUsers.GridColor = System.Drawing.Color.Black;
@@ -170,8 +195,10 @@ namespace FormsProyect
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.ReadOnly = true;
             this.dgvUsers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvUsers.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvUsers.RowTemplate.Height = 25;
-            this.dgvUsers.Size = new System.Drawing.Size(547, 150);
+            this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvUsers.Size = new System.Drawing.Size(644, 150);
             this.dgvUsers.TabIndex = 1;
             // 
             // label2
@@ -179,7 +206,7 @@ namespace FormsProyect
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(547, 26);
+            this.label2.Size = new System.Drawing.Size(644, 26);
             this.label2.TabIndex = 0;
             this.label2.Text = "Usuarios";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -188,6 +215,7 @@ namespace FormsProyect
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.btnUsuariosDb);
             this.panel2.Controls.Add(this.btnCleanDb);
             this.panel2.Controls.Add(this.btnCloseApp);
@@ -196,20 +224,36 @@ namespace FormsProyect
             this.panel2.Controls.Add(this.btnAddIncidence);
             this.panel2.Location = new System.Drawing.Point(13, 27);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(546, 40);
+            this.panel2.Size = new System.Drawing.Size(643, 40);
             this.panel2.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(421, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 40);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Ver Usuarios en BD";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnUsuariosDb
             // 
             this.btnUsuariosDb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnUsuariosDb.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnUsuariosDb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUsuariosDb.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnUsuariosDb.ForeColor = System.Drawing.Color.White;
             this.btnUsuariosDb.Location = new System.Drawing.Point(328, 0);
             this.btnUsuariosDb.Name = "btnUsuariosDb";
             this.btnUsuariosDb.Size = new System.Drawing.Size(93, 40);
             this.btnUsuariosDb.TabIndex = 5;
-            this.btnUsuariosDb.Text = "Enviar usuarios a Db";
+            this.btnUsuariosDb.Text = "Enviar usuarios a BD";
             this.btnUsuariosDb.UseVisualStyleBackColor = false;
             this.btnUsuariosDb.Click += new System.EventHandler(this.btnUsuariosDb_Click);
             // 
@@ -218,6 +262,7 @@ namespace FormsProyect
             this.btnCleanDb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnCleanDb.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnCleanDb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCleanDb.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnCleanDb.ForeColor = System.Drawing.Color.White;
             this.btnCleanDb.Location = new System.Drawing.Point(235, 0);
             this.btnCleanDb.Name = "btnCleanDb";
@@ -232,8 +277,9 @@ namespace FormsProyect
             this.btnCloseApp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnCloseApp.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCloseApp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseApp.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnCloseApp.ForeColor = System.Drawing.Color.White;
-            this.btnCloseApp.Location = new System.Drawing.Point(471, 0);
+            this.btnCloseApp.Location = new System.Drawing.Point(568, 0);
             this.btnCloseApp.Name = "btnCloseApp";
             this.btnCloseApp.Size = new System.Drawing.Size(75, 40);
             this.btnCloseApp.TabIndex = 3;
@@ -246,6 +292,7 @@ namespace FormsProyect
             this.btnSeeStatistics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnSeeStatistics.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSeeStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeeStatistics.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSeeStatistics.ForeColor = System.Drawing.Color.White;
             this.btnSeeStatistics.Location = new System.Drawing.Point(150, 0);
             this.btnSeeStatistics.Name = "btnSeeStatistics";
@@ -260,6 +307,7 @@ namespace FormsProyect
             this.btnCloseIncidence.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnCloseIncidence.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnCloseIncidence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseIncidence.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnCloseIncidence.ForeColor = System.Drawing.Color.White;
             this.btnCloseIncidence.Location = new System.Drawing.Point(75, 0);
             this.btnCloseIncidence.Name = "btnCloseIncidence";
@@ -274,6 +322,7 @@ namespace FormsProyect
             this.btnAddIncidence.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnAddIncidence.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnAddIncidence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddIncidence.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAddIncidence.ForeColor = System.Drawing.Color.White;
             this.btnAddIncidence.Location = new System.Drawing.Point(0, 0);
             this.btnAddIncidence.Name = "btnAddIncidence";
@@ -288,7 +337,7 @@ namespace FormsProyect
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
-            this.ClientSize = new System.Drawing.Size(571, 650);
+            this.ClientSize = new System.Drawing.Size(668, 650);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -298,7 +347,6 @@ namespace FormsProyect
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fernando Dieguez 2E";
-            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvIncidences)).EndInit();
@@ -327,6 +375,7 @@ namespace FormsProyect
         private System.Windows.Forms.Button btnCloseApp;
         private System.Windows.Forms.Button btnCleanDb;
         private System.Windows.Forms.Button btnUsuariosDb;
+        private System.Windows.Forms.Button button1;
     }
 }
 

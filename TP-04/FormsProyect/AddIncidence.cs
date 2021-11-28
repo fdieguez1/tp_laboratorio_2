@@ -52,5 +52,6 @@ namespace FormsProyect
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
     }
 }

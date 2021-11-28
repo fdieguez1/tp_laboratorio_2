@@ -66,7 +66,7 @@
     <RefactorLog Include="Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DatabaseLocal.publish.xml" />
+    <None Include="Database.publishLocal.xml" />
     <None Include="InitialScript\InitialLoad.sql" />
   </ItemGroup>
 </Project>

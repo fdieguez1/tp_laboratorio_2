@@ -39,33 +39,33 @@ namespace FormsProyect
         {
             statisticsLogs = new List<string>();
 
-            int conteoIncidencias = NucleoDelSistema.Incidencias.Count;
+            int conteoIncidenciasAbiertas = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Estado != EEstado.Cerrada).Count();
 
             //Utilizo un metodo propio que hace uso de genericos, interfaces y delegados (intenta hacer lo mismo que un Where de LINQ)
             int conteoMayores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Edad > 17).Count();
-            int conteoMenoresBloqueante = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Edad <= 17 && x.Error.Tipo.EsBloqueante()).Count();
-            int conteoMasculinosMenores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == EGenero.Masculino && x.Usuario.Edad <= 17).Count();
-            int conteoFemeninosMayores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == EGenero.Femenino && x.Usuario.Edad > 17).Count();
-            int conteoNoBinariosConCrash = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == EGenero.NoBinario && x.Error.Tipo == ETipo.Crash).Count();
+            int conteoMenoresBloqueante = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Edad <= 17 && x.Error.Tipo.EsBloqueante() && x.Estado != EEstado.Cerrada).Count();
+            int conteoMasculinosMenores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == EGenero.Masculino && x.Usuario.Edad <= 17 && x.Estado != EEstado.Cerrada).Count();
+            int conteoFemeninosMayores = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == EGenero.Femenino && x.Usuario.Edad > 17 && x.Estado != EEstado.Cerrada).Count();
+            int conteoNoBinariosConCrash = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Usuario.Genero == EGenero.NoBinario && x.Error.Tipo == ETipo.Crash && x.Estado != EEstado.Cerrada).Count();
 
             //Metodo de extension de int para calcular un porcentaje, dado un segundo parametro tambien de tipo int.
-            float porcentajeMayores = conteoIncidencias.CalcularPorcentaje(conteoMayores);
+            float porcentajeMayores = conteoIncidenciasAbiertas.CalcularPorcentaje(conteoMayores);
             statisticsLogs.Add($"Porcentaje de mayores de edad con errores: {porcentajeMayores:0.00}%");
-            float porcentajeMenoresBloqueante = conteoIncidencias.CalcularPorcentaje(conteoMenoresBloqueante);
+            float porcentajeMenoresBloqueante = conteoIncidenciasAbiertas.CalcularPorcentaje(conteoMenoresBloqueante);
             statisticsLogs.Add($"Porcentaje de menores de edad con error bloqueante: {porcentajeMenoresBloqueante:0.00}%");
 
-            float porcentajeMasculinoMenores = conteoIncidencias.CalcularPorcentaje(conteoMasculinosMenores);
+            float porcentajeMasculinoMenores = conteoIncidenciasAbiertas.CalcularPorcentaje(conteoMasculinosMenores);
             statisticsLogs.Add($"Porcentaje de masculinos menores con errores: {porcentajeMasculinoMenores:0.00}%");
-            float porcentajeFemeninoMayores = conteoIncidencias.CalcularPorcentaje(conteoFemeninosMayores);
+            float porcentajeFemeninoMayores = conteoIncidenciasAbiertas.CalcularPorcentaje(conteoFemeninosMayores);
             statisticsLogs.Add($"Porcentaje de femeninos mayores con errores: {porcentajeFemeninoMayores:0.00}%");
-            float porcentajeNoBinarioConCrash = conteoIncidencias.CalcularPorcentaje(conteoNoBinariosConCrash);
+            float porcentajeNoBinarioConCrash = conteoIncidenciasAbiertas.CalcularPorcentaje(conteoNoBinariosConCrash);
             statisticsLogs.Add($"Porcentaje de no binarios con errores de tipo crash: {porcentajeNoBinarioConCrash:0.00}%");
 
-            int conteoBloqueantes = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Error.Tipo.EsBloqueante()).Count();
-            int conteoNoBloqueantes = NucleoDelSistema.Incidencias.FiltrarColleccion(x => !x.Error.Tipo.EsBloqueante()).Count();
-            float porcentajeBloqueantes = conteoIncidencias.CalcularPorcentaje(conteoBloqueantes);
+            int conteoBloqueantes = NucleoDelSistema.Incidencias.FiltrarColleccion(x => x.Error.Tipo.EsBloqueante() && x.Estado != EEstado.Cerrada).Count();
+            int conteoNoBloqueantes = NucleoDelSistema.Incidencias.FiltrarColleccion(x => !x.Error.Tipo.EsBloqueante() && x.Estado != EEstado.Cerrada).Count();
+            float porcentajeBloqueantes = conteoIncidenciasAbiertas.CalcularPorcentaje(conteoBloqueantes);
             statisticsLogs.Add($"Porcentaje de errores bloqueantes: {porcentajeBloqueantes:0.00}%");
-            float porcentajeNoBloqueantes = conteoIncidencias.CalcularPorcentaje(conteoNoBloqueantes);
+            float porcentajeNoBloqueantes = conteoIncidenciasAbiertas.CalcularPorcentaje(conteoNoBloqueantes);
             statisticsLogs.Add($"Porcentaje de errores no bloqueantes: {porcentajeNoBloqueantes:0.00}%");
 
             lbxEstadisticas.DataSource = statisticsLogs;

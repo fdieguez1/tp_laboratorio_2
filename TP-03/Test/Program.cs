@@ -53,6 +53,8 @@ namespace Test
             NucleoDelSistema.Instance.EscribirArchivoJson(NucleoDelSistema.Usuarios);
             Console.WriteLine("Archivo guardado");
 
+            Console.WriteLine("Presione cualquier tecla para continuar");
+            Console.ReadKey();
         }
     }
 }

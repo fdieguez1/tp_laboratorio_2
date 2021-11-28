@@ -40,7 +40,7 @@ namespace FormsProyect
         /// <summary>
         /// Instancio la conexion a la DB pasandole un connection string
         /// </summary>
-        public DB dbContext = new DB("Data Source=.;Initial Catalog=UTN;Integrated Security=True;TimeOut=3");
+        public DBContext dbContext = new DBContext();
 
         /// <summary>
         /// Delegado para utilizar en caso de que se requiera una invocacion de un metodo en otro hilo
@@ -53,40 +53,20 @@ namespace FormsProyect
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Metodo encargado de traer al frente el formulario (No esta funcionando, es un problema relacionado a hilos ya que esperando un momento antes de realizar el focus el formulario se muestra correctamente)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void ShowMainForm(object sender, EventArgs e)
-        {
-            if (this.InvokeRequired)
-            {
-                Callback callback = new Callback(ShowMainForm);
-                object[] args = new object[]
-                {
-                    sender,
-                    e
-                };
-
-                this.Invoke(callback, args);
-            }
-            else
-            {
-                this.Show();
-                this.Focus();
-            }
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            NucleoDelSistema.Instance.CargaTest(10, 10, 11);
+            NucleoDelSistema.Instance.CargaTest(20, 20, 21);
             RefreshDataGridViews(sender, e);
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvErrors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvIncidences.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             OnRefreshInterface = (sender, e) => { this.Show(); this.Focus(); };
             OnRefreshInterface += RefreshDataGridViews;
+            dgvErrors.Columns[0].Width = 50;
+            dgvErrors.Columns[1].Width = 100;
+            dgvUsers.Columns[0].Width = 50;
+            dgvIncidences.Columns[0].Width = 50;
+            dgvIncidences.Columns[1].Width = 100;
         }
 
         /// <summary>
@@ -156,11 +136,6 @@ namespace FormsProyect
             });
         }
 
-        private void MainForm_Activated(object sender, EventArgs e)
-        {
-            //Invoco al evento al activar el form
-            OnRefreshInterface?.Invoke(sender, e);
-        }
 
         /// <summary>
         /// Limpia la base de datos de registros de usuarios en la tabla dbo.users, corre en un hilo secundario
@@ -173,7 +148,7 @@ namespace FormsProyect
             {
                 try
                 {
-                    dbContext.DeleteAllUsers();
+                    DBContext.DeleteAllUsers();
                     MessageBox.Show("Limpieza de usuarios en la DB correcta");
                 }
                 catch (Exception ex)
@@ -195,13 +170,23 @@ namespace FormsProyect
             {
                 try
                 {
-                    dbContext.Post(NucleoDelSistema.Usuarios);
+                    DBContext.Post(NucleoDelSistema.Usuarios);
                     MessageBox.Show("Carga de usuarios en la DB correcta");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Ocurrio un problema al cargar usuarios a la base, Exception: {ex.Message}", "Error en la DB");
                 }
+            });
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Corro esto en otro hilo para no bloquear la UI principal, se pueden ejecutar estadisticas o dejar abierto este dialog y seguir utilizando el hilo principal
+            Task.Run(() =>
+            {
+                Form AddForm = new DbUsersQuery();
+                AddForm.ShowDialog();
             });
         }
     }

@@ -31,6 +31,7 @@ namespace FormsProyect
             if (cierreOk)
             {
                 MessageBox.Show("Cierre de incidencia Ok");
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
