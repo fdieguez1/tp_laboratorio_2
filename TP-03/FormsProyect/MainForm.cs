@@ -37,6 +37,8 @@ namespace FormsProyect
                 return instance;
             }
         }
+
+
         /// <summary>
         /// Instancio la conexion a la DB pasandole un connection string
         /// </summary>
@@ -96,6 +98,7 @@ namespace FormsProyect
         }
 
 
+
         private void btnCloseApp_Click(object sender, EventArgs e)
         {
             bool messageOk = MessageBox.Show("Seguro desea salir?", "Cerrando app", MessageBoxButtons.YesNo) == DialogResult.Yes;
@@ -108,22 +111,22 @@ namespace FormsProyect
 
         private void bntAddIncidence_Click(object sender, EventArgs e)
         {
-            //Corro esto en otro hilo para no bloquear la UI principal, se pueden ejecutar multiples cargas o dejar abierto este dialog y seguir utilizando el hilo principal
-            Task.Run(() =>
+            //Esta tarea corre en el mismo hilo, para bloquear la UI hasta terminar los cambios
+            Form AddForm = new AddIncidence();
+            if (AddForm.ShowDialog() == DialogResult.OK)
             {
-                Form AddForm = new AddIncidence();
-                AddForm.ShowDialog();
-            });
+                MainForm.Instance.RefreshDataGridViews(sender, e);
+            }
         }
 
         private void btnCloseIncidence_Click(object sender, EventArgs e)
         {
-            //Corro esto en otro hilo para no bloquear la UI principal, se pueden ejecutar multiples cierres o dejar abierto este dialog y seguir utilizando el hilo principal
-            Task.Run(() =>
-            {
-                Form AddForm = new CloseIncidence();
-                AddForm.ShowDialog();
-            });
+            //Esta tarea corre en el mismo hilo, para bloquear la UI hasta terminar los cambios
+            Form AddForm = new CloseIncidence();
+            if (AddForm.ShowDialog() == DialogResult.OK) {
+                MainForm.Instance.RefreshDataGridViews(sender, e);
+            }
+            
         }
 
         private void btnSeeStatistics_Click(object sender, EventArgs e)
